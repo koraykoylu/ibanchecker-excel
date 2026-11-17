@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>IBAN Checker</title>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <script src="core.js"></script>
+    <script src="functions.js"></script>
+    <link rel="stylesheet" href="taskpane.css">
+  </head>
+  <body>
+    <main class="pane">
+      <section>
+        <h2>Check selected IBANs</h2>
+        <p>Select the cells that hold the IBANs, then check them. The results are written as values in the five columns to the right of the selection.</p>
+        <div class="row">
+          <button id="check" class="primary" type="button">Check selected IBANs</button>
+        </div>
+        <div id="confirm" class="notice hidden" role="alertdialog" aria-labelledby="confirm-text">
+          <p id="confirm-text">The five columns to the right already hold data. Insert five new columns for the results? Nothing in the sheet is overwritten.</p>
+          <div class="row">
+            <button id="confirm-yes" class="primary" type="button">Insert five columns</button>
+            <button id="confirm-no" type="button">Cancel</button>
+          </div>
+        </div>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </section>
+
+      <section>
+        <h2>API key</h2>
+        <div id="has-key" class="hidden">
+          <p>Key saved: <code id="hint"></code></p>
+          <div class="row">
+            <button id="remove" type="button">Remove key</button>
+          </div>
+        </div>
+        <div id="no-key" class="hidden">
+          <p>Paste your ibanchecker.cash API key. It is kept in Office's storage on this device, not in the workbook.</p>
+          <label class="sr" for="key">API key</label>
+          <input id="key" type="text" name="ibc-api-key" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" data-1p-ignore data-lpignore="true" data-bwignore="true" data-form-type="other" placeholder="iban_…">
+          <div class="row">
+            <button id="save" class="primary" type="button">Save key</button>
+          </div>
+          <p class="muted">No key yet? <a href="https://ibanchecker.cash/api-docs" target="_blank" rel="noopener noreferrer">Get a free key</a>.</p>
+        </div>
+        <p id="message" class="error" role="alert"></p>
+        <p id="usage" class="muted"></p>
+      </section>
+
+      <section>
+        <h2>Formulas</h2>
+        <ul class="formulas">
+          <li><code>=IBAN.VALID(A2:A100)</code> TRUE or FALSE</li>
+          <li><code>=IBAN.ERROR(A2:A100)</code> why an IBAN failed</li>
+          <li><code>=IBAN.BANK(A2:A100)</code> the bank's name</li>
+          <li><code>=IBAN.BIC(A2:A100)</code> the bank's BIC</li>
+          <li><code>=IBAN.CHECK(A2:A100)</code> all five columns</li>
+        </ul>
+        <p class="muted">Each IBAN counts as one request on your key. Results are kept for six hours on this device, under a hash rather than the IBAN, so the same IBAN checked again within six hours is not counted.</p>
+      </section>
+
+      <section>
+        <h2>Links</h2>
+        <ul>
+          <li><a href="https://ibanchecker.cash/integrations/excel" target="_blank" rel="noopener noreferrer">Help</a></li>
+          <li><a href="https://ibanchecker.cash/pricing" target="_blank" rel="noopener noreferrer">Plans and limits</a></li>
+          <li><a href="https://ibanchecker.cash/privacy#excel" target="_blank" rel="noopener noreferrer">Privacy policy</a></li>
+          <li><a href="https://ibanchecker.cash/contact" target="_blank" rel="noopener noreferrer">Contact support</a></li>
+        </ul>
+        <p class="muted" id="version"></p>
+      </section>
+    </main>
+    <script src="taskpane.js"></script>
+  </body>
+</html>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+  <Id>ce4e2d4e-5284-4f92-beee-d11e6fef1cbe</Id>
+  <Version>0.1.0.0</Version>
+  <ProviderName>Koylu Ltd</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="IBAN Checker"/>
+  <Description DefaultValue="Check a column of IBANs in Excel: whether each one is valid, why it failed, its country, its bank and the bank's BIC. Needs an ibanchecker.cash API key."/>
+  <IconUrl DefaultValue="https://ibanchecker.cash/excel/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://ibanchecker.cash/excel/assets/icon-64.png"/>
+  <SupportUrl DefaultValue="https://ibanchecker.cash/integrations/excel"/>
+  <AppDomains>
+    <AppDomain>https://ibanchecker.cash</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Workbook"/>
+  </Hosts>
+  <Requirements>
+    <Sets DefaultMinVersion="1.1">
+      <Set Name="SharedRuntime" MinVersion="1.1"/>
+      <Set Name="CustomFunctionsRuntime" MinVersion="1.1"/>
+    </Sets>
+  </Requirements>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://ibanchecker.cash/excel/taskpane.html"/>
+  </DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Hosts>
+      <Host xsi:type="Workbook">
+        <Runtimes>
+          <Runtime resid="Taskpane.Url" lifetime="long"/>
+        </Runtimes>
+        <AllFormFactors>
+          <ExtensionPoint xsi:type="CustomFunctions">
+            <Script>
+              <SourceLocation resid="Functions.Script.Url"/>
+            </Script>
+            <Page>
+              <SourceLocation resid="Taskpane.Url"/>
+            </Page>
+            <Metadata>
+              <SourceLocation resid="Functions.Metadata.Url"/>
+            </Metadata>
+            <Namespace resid="Functions.Namespace"/>
+          </ExtensionPoint>
+        </AllFormFactors>
+        <DesktopFormFactor>
+          <GetStarted>
+            <Title resid="GetStarted.Title"/>
+            <Description resid="GetStarted.Description"/>
+            <LearnMoreUrl resid="Help.Url"/>
+          </GetStarted>
+          <FunctionFile resid="Taskpane.Url"/>
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <OfficeTab id="TabHome">
+              <Group id="IBC.Group">
+                <Label resid="Group.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16"/>
+                  <bt:Image size="32" resid="Icon.32"/>
+                  <bt:Image size="80" resid="Icon.80"/>
+                </Icon>
+                <Control xsi:type="Button" id="IBC.Check">
+                  <Label resid="Check.Label"/>
+                  <Supertip>
+                    <Title resid="Check.Label"/>
+                    <Description resid="Check.Tip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16"/>
+                    <bt:Image size="32" resid="Icon.32"/>
+                    <bt:Image size="80" resid="Icon.80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>checkSelection</FunctionName>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="IBC.Settings">
+                  <Label resid="Settings.Label"/>
+                  <Supertip>
+                    <Title resid="Settings.Label"/>
+                    <Description resid="Settings.Tip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16"/>
+                    <bt:Image size="32" resid="Icon.32"/>
+                    <bt:Image size="80" resid="Icon.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>IBC.Taskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16" DefaultValue="https://ibanchecker.cash/excel/assets/icon-16.png"/>
+        <bt:Image id="Icon.32" DefaultValue="https://ibanchecker.cash/excel/assets/icon-32.png"/>
+        <bt:Image id="Icon.80" DefaultValue="https://ibanchecker.cash/excel/assets/icon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="Functions.Script.Url" DefaultValue="https://ibanchecker.cash/excel/functions.js"/>
+        <bt:Url id="Functions.Metadata.Url" DefaultValue="https://ibanchecker.cash/excel/functions.json"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://ibanchecker.cash/excel/taskpane.html"/>
+        <bt:Url id="Help.Url" DefaultValue="https://ibanchecker.cash/integrations/excel"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="Functions.Namespace" DefaultValue="IBAN"/>
+        <bt:String id="GetStarted.Title" DefaultValue="IBAN Checker is ready"/>
+        <bt:String id="Group.Label" DefaultValue="IBAN Checker"/>
+        <bt:String id="Check.Label" DefaultValue="Check selected IBANs"/>
+        <bt:String id="Settings.Label" DefaultValue="Settings"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="GetStarted.Description" DefaultValue="Open Home > Settings in the IBAN Checker group to add your API key, then use =IBAN.CHECK(A2:A100) or Check selected IBANs."/>
+        <bt:String id="Check.Tip" DefaultValue="Validate the IBANs in the selection and write validity, error, country, bank and BIC in the five columns to the right."/>
+        <bt:String id="Settings.Tip" DefaultValue="Add or remove your ibanchecker.cash API key and see how to use the formulas."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>

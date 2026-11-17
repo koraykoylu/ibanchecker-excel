@@ -1,0 +1,94 @@
+{
+  "functions": [
+    {
+      "id": "VALID",
+      "name": "VALID",
+      "description": "Whether each IBAN is valid, checked by ibanchecker.cash: TRUE or FALSE.",
+      "helpUrl": "https://ibanchecker.cash/integrations/excel#formulas",
+      "result": {
+        "type": "any",
+        "dimensionality": "matrix"
+      },
+      "parameters": [
+        {
+          "name": "ibans",
+          "description": "A cell or a range of IBANs.",
+          "type": "any",
+          "dimensionality": "matrix"
+        }
+      ]
+    },
+    {
+      "id": "ERROR",
+      "name": "ERROR",
+      "description": "Why each IBAN is invalid; empty for a valid IBAN.",
+      "helpUrl": "https://ibanchecker.cash/integrations/excel#formulas",
+      "result": {
+        "type": "any",
+        "dimensionality": "matrix"
+      },
+      "parameters": [
+        {
+          "name": "ibans",
+          "description": "A cell or a range of IBANs.",
+          "type": "any",
+          "dimensionality": "matrix"
+        }
+      ]
+    },
+    {
+      "id": "BANK",
+      "name": "BANK",
+      "description": "The bank behind each IBAN.",
+      "helpUrl": "https://ibanchecker.cash/integrations/excel#formulas",
+      "result": {
+        "type": "any",
+        "dimensionality": "matrix"
+      },
+      "parameters": [
+        {
+          "name": "ibans",
+          "description": "A cell or a range of IBANs.",
+          "type": "any",
+          "dimensionality": "matrix"
+        }
+      ]
+    },
+    {
+      "id": "BIC",
+      "name": "BIC",
+      "description": "The BIC (SWIFT code) of the bank behind each IBAN.",
+      "helpUrl": "https://ibanchecker.cash/integrations/excel#formulas",
+      "result": {
+        "type": "any",
+        "dimensionality": "matrix"
+      },
+      "parameters": [
+        {
+          "name": "ibans",
+          "description": "A cell or a range of IBANs.",
+          "type": "any",
+          "dimensionality": "matrix"
+        }
+      ]
+    },
+    {
+      "id": "CHECK",
+      "name": "CHECK",
+      "description": "Validity, error, country, bank and BIC of each IBAN, in five columns.",
+      "helpUrl": "https://ibanchecker.cash/integrations/excel#formulas",
+      "result": {
+        "type": "any",
+        "dimensionality": "matrix"
+      },
+      "parameters": [
+        {
+          "name": "ibans",
+          "description": "A cell or a single column of IBANs.",
+          "type": "any",
+          "dimensionality": "matrix"
+        }
+      ]
+    }
+  ]
+}
